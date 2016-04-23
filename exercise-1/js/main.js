@@ -3,6 +3,8 @@
 $(function() {
 	// Read in your data. On success, run the rest of your code
 	d3.csv('data/prepped_data.csv', function(error, data){
+
+		console.log(data);
 		// Setting defaults
 		var margin = {top: 40, right: 10, bottom: 10, left: 10},
 		    width = 960 - margin.left - margin.right,
@@ -32,9 +34,27 @@ $(function() {
 
 		// Construct a nest function using `d3.nest`, and create a variable with your nested data
 
+		var nest = d3.nest()
+			.key(function(d) {return d.region;});
+
+		var nestedData = nest.entries(data);
+
+		var treemap = d3.layout.treemap()
+			.size([500, 500])
+			.sticky(true)
+			.value(function(d) {return d.measure})
+			.children(function(d) {return d.values})
+
+		var treemapData = treemap.nodes({values : nestedData});
+
 		// Construct a treemap function that sizes elements based on the current `measure`, and
 		// Make sure to specify how to retrieve the `children` from each element
 
+
+		var draw = function() {
+			var divs = div.selectAll()
+				.data(data function(d) {return d. })
+		}
 
 		// Write your `draw` function to bind data, and position elements
 
