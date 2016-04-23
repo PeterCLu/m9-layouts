@@ -53,11 +53,16 @@ $(function() {
 
 		var draw = function() {
 			var divs = div.selectAll()
-				.data(data function(d) {return d. })
+				.data(data, function(d) {return d.measure });
+			divs.enter()
+				.append('div');
+			divs.attr(position);
+			divs.exit().remove();
 		}
 
 		// Write your `draw` function to bind data, and position elements
 
+		draw;
 
 		// Call your draw function
 
